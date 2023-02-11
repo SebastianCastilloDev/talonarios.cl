@@ -31,5 +31,8 @@
             background-color: lighten(v.$primario, 50%);
         }
     }
+    &__tbody{
+        background-color: v.$blanco;
+    }
 
 }

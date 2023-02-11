@@ -1,0 +1,35 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.lista{
+    &__heading{
+
+        @include m.heading;
+    }
+
+    &__tabla{
+        width: 100%;
+        border: 2px solid v.$primario;
+        text-align: center;
+        border-collapse: collapse;
+    }
+    &__thead{
+        background-color: v.$negro;
+        color: v.$blanco;
+    }
+    &__th{
+        padding: 1rem 0;
+    }
+
+    &__td{
+        padding: 1rem;
+        font-size: 2rem;
+    }
+
+    &__tr{
+        &:hover{
+            background-color: lighten(v.$primario, 50%);
+        }
+    }
+
+}

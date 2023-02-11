@@ -1,0 +1,46 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.productos {
+    margin-top: 0;
+
+    @include m.tablet {
+        margin-top: 10rem;
+    }
+
+    &__heading{
+        @include m.heading;
+        font-size: 3rem;
+    }
+
+    &__grid{
+        @include m.grid(1,2rem);
+        @include m.tablet {
+            @include m.grid(3, 2rem);
+        }
+    }
+}
+
+.producto {
+    background-color: v.$blanco;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    &__nombre{
+        margin-top: 1.5rem;
+        text-transform: uppercase;
+
+    }
+    &__enlace  {
+        @include m.boton(lighten(v.$rojo,20%), v.$negro);
+        margin-top: 0;
+    }
+
+    &__imagen {
+        aspect-ratio: 8  / 10;
+        border: 1px solid v.$primario;
+        border-radius: 3px;
+        width: 20rem;
+    }
+}
+

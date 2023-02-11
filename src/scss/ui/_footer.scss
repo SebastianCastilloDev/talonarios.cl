@@ -1,0 +1,62 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.footer {
+    background-color: lighten(v.$primario, 5%);
+    padding: 3rem 0 0 0;
+    margin: 5rem 0 0 0;
+
+    &__grid{
+        @include m.tablet {
+            @include m.grid(3,2rem);
+        }
+    }
+
+    &__heading{
+        color: v.$blanco;
+        font-size: 2rem;
+    }
+
+    &__frase {
+        color: v.$blanco;
+        font-size: 1.8rem;
+    }
+
+    &__navegacion {
+        display: flex;
+        flex-direction: column;
+    }
+
+    &__link{
+        color: v.$blanco;
+        font-size: 1.8rem;
+        margin-bottom: 1rem;
+
+        &:last-of-type{
+            margin-bottom: 0;
+        }
+    }
+    &__copyright{
+        background-color: darken(v.$primario, 10%);
+        text-align: center;
+        padding: 1rem;
+        margin: 0;
+        color: v.$blanco;
+    }
+
+    &__nombre-contacto{
+        color:v.$blanco;
+        font-size: 2.3rem;
+        background-color: darken(v.$primario, 20%);
+        text-align: center;
+    }
+
+    &__logo-iconos{
+        margin-top: 2.8rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+}

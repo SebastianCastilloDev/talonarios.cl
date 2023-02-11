@@ -1,0 +1,35 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.nosotros{
+
+    margin-top: 5rem;
+
+    &__heading{
+        @include m.heading();
+        font-size: 3rem;
+    }
+
+    &__caracteristicas{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        @include m.tablet {
+            flex-direction: row;
+        }
+    }
+
+    &__caracteristica{
+        max-width: 80rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 2rem;
+    }
+
+    &__texto{
+        text-align: center;
+    }
+}

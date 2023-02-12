@@ -1,14 +1,4 @@
-function $cl(number) {
-    let pesos = new Intl.NumberFormat('cl-ES').format(number)
-    pesos = `$ ${pesos}`
-    return pesos
-}
 
-function $formatoNumero(number) {
-    let numero = new Intl.NumberFormat('cl-ES').format(number)
-    numero = `${numero}`
-    return numero
-}
 
 
 
@@ -39,6 +29,53 @@ function getParameters() {
     }
 
 }
+
+
+
+cantidades = [50,100,500,1000,2000,5000]
+
+listasDePrecios(cantidades, 4, 2, "cuarto-carta-duplicado")
+listasDePrecios(cantidades, 4, 3, "cuarto-carta-triplicado")
+listasDePrecios(cantidades, 4, 4, "cuarto-carta-cuadruplicado")
+listasDePrecios(cantidades, 4, 1, "cuarto-carta-simple")
+
+listasDePrecios(cantidades, 2, 2, "media-carta-duplicado")
+listasDePrecios(cantidades, 2, 3, "media-carta-triplicado")
+listasDePrecios(cantidades, 2, 4, "media-carta-cuadruplicado")
+listasDePrecios(cantidades, 2, 1, "media-carta-simple")
+
+listasDePrecios(cantidades, 2, 2, "carta-duplicado")
+listasDePrecios(cantidades, 2, 3, "carta-triplicado")
+listasDePrecios(cantidades, 2, 4, "carta-cuadruplicado")
+listasDePrecios(cantidades, 2, 1, "carta-simple")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 //Funcion que devuelve un json con todos los calculos asociaciados al precio.
 function resultados(cantidad, moldes, multiplicidad) {
@@ -95,71 +132,45 @@ function resultados(cantidad, moldes, multiplicidad) {
 }
 
 
-let cantidades = [50, 100, 500, 1000, 2000, 2500, 3000, 4000, 5000]
-let moldes = 4
-let multiplicidad = 2
-let valoresCuartoCartaDuplicado = []
 
-cantidades.forEach(function (cantidad) {
-    valoresCuartoCartaDuplicado.push(resultados(cantidad, moldes, multiplicidad))
-})
+function listasDePrecios(cantidades, moldes, multiplicidad, htmlId) {
 
-let template = ''
-valoresCuartoCartaDuplicado.forEach(function (valoresPrecios) {
-    template += `
-    <tr class="lista__tr">
-        <td class="lista__td">${valoresPrecios.talonarios}</td>
-        <td class="lista__td">${$formatoNumero(valoresPrecios.cantidad)}</td>
-        <td class="lista__td">${$cl(valoresPrecios.precioDeVenta)}</td>
-    </tr>
-    `
+    let el = document.getElementById(htmlId)
+
+    if (el){
+        console.log(el)
+        template = ''
+        let valores = []
+        cantidades.forEach(function (cantidad) {
+            valores.push(resultados(cantidad, moldes, multiplicidad))
+        })
+        
+        valores.forEach(function (valor) {
+            template += `
+            <tr class="lista__tr">
+            <td class="lista__td">${valor.talonarios}</td>
+            <td class="lista__td">${$formatoNumero(valor.cantidad)}</td>
+            <td class="lista__td">${$cl(valor.precioDeVenta)}</td>
+            </tr>
+            `
+        })
+    
+        el.innerHTML = template
+    }
+    
+    
+
 }
-)
-const duplicado = document.querySelector('#duplicado')
-duplicado.innerHTML = template
 
 
-
-
-moldes = 4
-multiplicidad = 3
-valoresCuartoCartaTriplicado = []
-cantidades.forEach(function (cantidad) {
-    valoresCuartoCartaTriplicado.push(resultados(cantidad, moldes, multiplicidad))
-})
-
-template = ''
-valoresCuartoCartaTriplicado.forEach(function (valoresPrecios) {
-    template += `
-    <tr class="lista__tr">
-        <td class="lista__td">${valoresPrecios.talonarios}</td>
-        <td class="lista__td">${$formatoNumero(valoresPrecios.cantidad)}</td>
-        <td class="lista__td">${$cl(valoresPrecios.precioDeVenta)}</td>
-    </tr>
-    `
+function $cl(number) {
+    let pesos = new Intl.NumberFormat('cl-ES').format(number)
+    pesos = `$ ${pesos}`
+    return pesos
 }
-)
-const triplicado = document.querySelector('#triplicado')
-triplicado.innerHTML = template
 
-
-moldes = 4
-multiplicidad = 4
-valoresCuartoCartaCuadruplicado = []
-cantidades.forEach(function (cantidad) {
-    valoresCuartoCartaCuadruplicado.push(resultados(cantidad, moldes, multiplicidad))
-})
-
-template = ''
-valoresCuartoCartaCuadruplicado.forEach(function (valoresPrecios) {
-    template += `
-    <tr class="lista__tr">
-        <td class="lista__td">${valoresPrecios.talonarios}</td>
-        <td class="lista__td">${$formatoNumero(valoresPrecios.cantidad)}</td>
-        <td class="lista__td">${$cl(valoresPrecios.precioDeVenta)}</td>
-    </tr>
-    `
+function $formatoNumero(number) {
+    let numero = new Intl.NumberFormat('cl-ES').format(number)
+    numero = `${numero}`
+    return numero
 }
-)
-const cuadruplicado = document.querySelector('#cuadruplicado')
-cuadruplicado.innerHTML = template

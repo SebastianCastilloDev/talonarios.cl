@@ -1,0 +1,14 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.lista{
+    &__heading{
+        text-align: center;
+        font-size: 2.5rem;
+    }
+
+    &__td{
+        text-align: center;
+        font-size: 1.8rem;
+    }
+}

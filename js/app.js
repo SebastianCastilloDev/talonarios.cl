@@ -94,13 +94,12 @@ function resultados(cantidad, moldes, multiplicidad) {
     }
 }
 
+
 let cantidades = [50, 100, 500, 1000, 2000, 2500, 3000, 4000, 5000]
 let moldes = 4
 let multiplicidad = 2
-
-
-
 let valoresCuartoCartaDuplicado = []
+
 cantidades.forEach(function (cantidad) {
     valoresCuartoCartaDuplicado.push(resultados(cantidad, moldes, multiplicidad))
 })
@@ -118,6 +117,8 @@ valoresCuartoCartaDuplicado.forEach(function (valoresPrecios) {
 )
 const duplicado = document.querySelector('#duplicado')
 duplicado.innerHTML = template
+
+
 
 
 moldes = 4
@@ -140,6 +141,7 @@ valoresCuartoCartaTriplicado.forEach(function (valoresPrecios) {
 )
 const triplicado = document.querySelector('#triplicado')
 triplicado.innerHTML = template
+
 
 moldes = 4
 multiplicidad = 4

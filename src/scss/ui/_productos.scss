@@ -5,7 +5,7 @@
     margin-top: 0;
 
     @include m.tablet {
-        margin-top: 10rem;
+        margin-top: 3rem;
     }
 
     &__heading{
@@ -26,14 +26,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    padding: 2rem 0 0 0;
     &__nombre{
         margin-top: 1.5rem;
         text-transform: uppercase;
+        margin-bottom: 0;
 
     }
     &__enlace  {
-        @include m.boton(lighten(v.$rojo,20%), v.$negro);
-        margin-top: 0;
+        @include m.boton(v.$rojo, v.$negro);
+        margin-bottom: 2rem;
     }
 
     &__imagen {
@@ -41,6 +43,7 @@
         border: 1px solid v.$primario;
         border-radius: 3px;
         width: 20rem;
+        
     }
 }
 

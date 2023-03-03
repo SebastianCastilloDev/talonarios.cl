@@ -1,7 +1,4 @@
 
-
-
-
 function getParameters() {
     //const cantidad = parseInt(document.querySelector('#cantidad').value)
     //const moldes = 4
@@ -32,7 +29,8 @@ function getParameters() {
 
 
 
-cantidades = [50,100,500,1000,2000,5000]
+// cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
+cantidades = [1000]
 
 listasDePrecios(cantidades, 4, 2, "cuarto-carta-duplicado")
 listasDePrecios(cantidades, 4, 3, "cuarto-carta-triplicado")
@@ -91,7 +89,7 @@ function resultados(cantidad, moldes, multiplicidad) {
         costoTinta
     } = getParameters()
 
-    const pagoOperacionesMenores = 10
+    const pagoOperacionesMenores = 100
 
     const tirajeUtil = cantidad / moldes * multiplicidad
     const talonarios = cantidad / unTal
@@ -99,7 +97,7 @@ function resultados(cantidad, moldes, multiplicidad) {
     const costoPapel = costoResma / hojasResma * tirajeReal
     const costoDiseno = valorDiseno
     const costoImpresion = tirajeReal * costoTinta
-    const costoManoDeObra = tirajeUtil % 1000 === 0 ? pagoOperacionesMenores * tirajeUtil / 1000 : pagoOperacionesMenores * parseInt(tirajeUtil / 1000 + 1)
+    const costoManoDeObra = tirajeUtil % 1000 === 0 ? pagoOperacionesMenores * talonarios * tirajeUtil / 1000 : pagoOperacionesMenores * talonarios * parseInt(tirajeUtil / 1000 + 1)
     const costoAlzado = tirajeUtil % 1000 === 0 ? pagoOperacionesMenores * tirajeUtil / 1000 : pagoOperacionesMenores * parseInt(tirajeUtil / 1000 + 1)
     const costoPerforado = tirajeUtil % 1000 === 0 ? pagoOperacionesMenores * tirajeUtil / 1000 : pagoOperacionesMenores * parseInt(tirajeUtil / 1000 + 1)
     const costoTerminado = tirajeUtil / unTal * pagoOperacionesMenores
@@ -109,6 +107,8 @@ function resultados(cantidad, moldes, multiplicidad) {
     const costoOperacional = costoDiseno + costoPapel + costoImpresion + costoManoDeObra + costoAlzado + costoPerforado + costoTerminado + costoSeparado + costoCorcheteado + costoCorte
     const costoTotal = costoOperacional * (1 + gg / 100)
     const precioDeVenta = Math.ceil((costoTotal * (1 + utilidad / 100) + impuesto / 100 * costoTotal * utilidad / 100) / 100) * 100
+
+    console.log({tirajeUtil, talonarios, tirajeReal, costoPapel, costoDiseno, costoImpresion, costoManoDeObra, costoAlzado, costoPerforado, costoTerminado, costoSeparado, costoCorcheteado, costoCorte, costoOperacional, costoTotal, precioDeVenta})
 
     return {
         cantidad,
@@ -138,7 +138,7 @@ function listasDePrecios(cantidades, moldes, multiplicidad, htmlId) {
     let el = document.getElementById(htmlId)
 
     if (el){
-        console.log(el)
+        // console.log(el)
         template = ''
         let valores = []
         cantidades.forEach(function (cantidad) {
@@ -147,10 +147,10 @@ function listasDePrecios(cantidades, moldes, multiplicidad, htmlId) {
         
         valores.forEach(function (valor) {
             template += `
-            <tr class="lista__tr">
-            <td class="lista__td">${valor.talonarios}</td>
-            <td class="lista__td">${$formatoNumero(valor.cantidad)}</td>
-            <td class="lista__td">${$cl(valor.precioDeVenta)}</td>
+                <tr class="lista__tr">
+                <td class="lista__td">${valor.talonarios}</td>
+                <td class="lista__td">${$formatoNumero(valor.cantidad)}</td>
+                <td class="lista__td">${$cl(valor.precioDeVenta)}</td>
             </tr>
             `
         })

@@ -37,13 +37,15 @@
     transition-property: background-color;
     transition-duration: .3s;
     text-align: center;
+    text-decoration: none;
 
     @include tablet {
         width: auto;
     }
     &:hover {
-        background-color: v.$blanco;
-        border: 2px solid v.$rojo;
+        background-color: $colorTexto;
+        border: 2px solid $bgColor;
+        color: $bgColor;
     }
 }
 

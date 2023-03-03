@@ -3,6 +3,10 @@
 
 .productos {
     margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:5rem;
 
     @include m.tablet {
         margin-top: 3rem;
@@ -26,7 +30,13 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem 0 0 0;
+    justify-content: center;
+    padding: 3rem 0 0 0;
+    border: 2px solid lighten(v.$primario, 20%);
+    border-radius: 10px;
+    padding: 4rem 4rem;
+    
+    
     &__nombre{
         margin-top: 1.5rem;
         text-transform: uppercase;
@@ -34,8 +44,8 @@
 
     }
     &__enlace  {
-        @include m.boton(v.$rojo, v.$negro);
-        margin-bottom: 2rem;
+        @include m.boton(v.$primario, v.$blanco);
+        
     }
 
     &__imagen {

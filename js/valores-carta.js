@@ -134,7 +134,6 @@ function resultados(cantidad, moldes, multiplicidad) {
 
 
 function listasDePrecios(cantidades, moldes, multiplicidad, htmlId) {
-    console.log(typeof(htmlId));
     let el = document.getElementById(htmlId)
     if (el){
         console.log(el)

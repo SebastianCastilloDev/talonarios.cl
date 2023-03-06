@@ -12,7 +12,13 @@ function getParameters() {
     const hojasResma = 500
     const costoResma = 6200
     const costoTinta = 3
+    const pagoManoDeObraImpresion = 1600 //por cada (valordecorteoperacionemenores) tiros 
+    const pagoOperacionesMenores = 25 //por talonario
+    const pagoAlzado = 500  
+    const pagoPerforado = 500
 
+    const tirajeDeCorte = 1000 //
+    
     return {
         sobrantes,
         unTal,
@@ -22,7 +28,12 @@ function getParameters() {
         impuesto,
         hojasResma,
         costoResma,
-        costoTinta
+        costoTinta,
+        pagoManoDeObraImpresion,
+        pagoOperacionesMenores,
+        pagoAlzado,
+        pagoPerforado,
+        tirajeDeCorte
     }
 
 }
@@ -34,21 +45,21 @@ const cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
 
 
 
-// listasDePrecios(cantidades, moldes, multiplicidad, htmlId)
-// listasDePrecios(cantidades, 4, 2, "cuarto-carta-duplicado")
-// listasDePrecios(cantidades, 4, 3, "cuarto-carta-triplicado")
-// listasDePrecios(cantidades, 4, 4, "cuarto-carta-cuadruplicado")
-// listasDePrecios(cantidades, 4, 1, "cuarto-carta-simple")
+// listasDePreciosHTML(cantidades, moldes, multiplicidad, htmlId)
+// listasDePreciosHTML(cantidades, 4, 2, "cuarto-carta-duplicado")
+// listasDePreciosHTML(cantidades, 4, 3, "cuarto-carta-triplicado")
+// listasDePreciosHTML(cantidades, 4, 4, "cuarto-carta-cuadruplicado")
+// listasDePreciosHTML(cantidades, 4, 1, "cuarto-carta-simple")
 
-// listasDePrecios(cantidades, 2, 2, "media-carta-duplicado")
-// listasDePrecios(cantidades, 2, 3, "media-carta-triplicado")
-// listasDePrecios(cantidades, 2, 4, "media-carta-cuadruplicado")
-// listasDePrecios(cantidades, 2, 1, "media-carta-simple")
+// listasDePreciosHTML(cantidades, 2, 2, "media-carta-duplicado")
+// listasDePreciosHTML(cantidades, 2, 3, "media-carta-triplicado")
+// listasDePreciosHTML(cantidades, 2, 4, "media-carta-cuadruplicado")
+// listasDePreciosHTML(cantidades, 2, 1, "media-carta-simple")
 
-// listasDePrecios(cantidades, 1, 2, "carta-duplicado")
-// listasDePrecios(cantidades, 1, 3, "carta-triplicado")
-// listasDePrecios(cantidades, 1, 4, "carta-cuadruplicado")
-// listasDePrecios(cantidades, 1, 1, "carta-simple")
+// listasDePreciosHTML(cantidades, 1, 2, "carta-duplicado")
+// listasDePreciosHTML(cantidades, 1, 3, "carta-triplicado")
+// listasDePreciosHTML(cantidades, 1, 4, "carta-cuadruplicado")
+// listasDePreciosHTML(cantidades, 1, 1, "carta-simple")
 
 function valores() {
     const moldes = [[4,'cuarto'],[2,'media'],[1,'completo']]
@@ -58,7 +69,7 @@ function valores() {
     moldes.forEach((molde)=>{
         tamanos.forEach( tamano => {
             multiplicidad.forEach((mult)=>{
-                listasDePrecios(cantidades, molde[0], mult[0], `${molde[1]}-${tamano}-${mult[1]}`)
+                listasDePreciosHTML(cantidades, molde[0], mult[0], `${molde[1]}-${tamano}-${mult[1]}`)
             })
         })
         
@@ -78,36 +89,56 @@ function resultados(cantidad, moldes, multiplicidad) {
         impuesto,
         hojasResma,
         costoResma,
-        costoTinta
+        costoTinta,
+        pagoManoDeObraImpresion,
+        pagoOperacionesMenores,
+        pagoAlzado,
+        pagoPerforado,
+        tirajeDeCorte
     } = getParameters()
 
-    const pagoOperacionesMenores = 100
-    const valorDeCorteOperacionesMenores = 500 //En terminos de cantidad
     
     const tirajeUtil = cantidad / moldes * multiplicidad
 
-    const costoDeOperacionesMenores = tirajeUtil % valorDeCorteOperacionesMenores === 0 ? pagoOperacionesMenores * tirajeUtil / valorDeCorteOperacionesMenores : pagoOperacionesMenores * parseInt(tirajeUtil / valorDeCorteOperacionesMenores + 1)
     
     const talonarios = cantidad / unTal
     const tirajeReal = tirajeUtil + sobrantes * multiplicidad
     const costoPapel = costoResma / hojasResma * tirajeReal
     const costoDiseno = valorDiseno
     const costoImpresion = tirajeReal * costoTinta
-    const costoManoDeObra = costoDeOperacionesMenores
-    const costoAlzado = costoDeOperacionesMenores
-    const costoPerforado = costoDeOperacionesMenores
-    const costoTerminado = costoDeOperacionesMenores
-    const costoSeparado = costoDeOperacionesMenores
-    const costoCorcheteado = costoDeOperacionesMenores
-    const costoCorte =  costoDeOperacionesMenores
+
+    const costoManoDeObraImpresion =    tirajeUtil % tirajeDeCorte === 0 ? 
+                                        pagoManoDeObraImpresion * tirajeUtil / tirajeDeCorte : 
+                                        pagoManoDeObraImpresion * parseInt(tirajeUtil / tirajeDeCorte + 1)
+
+    const costoAlzado =                 tirajeUtil % tirajeDeCorte === 0 ? 
+                                        pagoAlzado * tirajeUtil / tirajeDeCorte : 
+                                        pagoAlzado * parseInt(tirajeUtil / tirajeDeCorte + 1)
+
+    const costoPerforado =              tirajeUtil % tirajeDeCorte === 0 ? 
+                                        pagoPerforado * tirajeUtil / tirajeDeCorte : 
+                                        pagoPerforado * parseInt(tirajeUtil / tirajeDeCorte + 1)
+
+    const costoTerminado = talonarios*pagoOperacionesMenores
+    const costoSeparado = talonarios*pagoOperacionesMenores
+    const costoCorcheteado = talonarios*pagoOperacionesMenores
+    const costoCorte =  talonarios*pagoOperacionesMenores
     
-    const costoOperacional = costoDiseno + costoPapel + costoImpresion + costoManoDeObra + costoAlzado + costoPerforado + costoTerminado + costoSeparado + costoCorcheteado + costoCorte
+    const costoOperacional = costoDiseno 
+                            + costoPapel 
+                            + costoImpresion 
+                            + costoManoDeObraImpresion 
+                            + costoAlzado 
+                            + costoPerforado 
+                            + costoTerminado 
+                            + costoSeparado 
+                            + costoCorcheteado 
+                            + costoCorte
     const costoTotal = costoOperacional * (1 + gg / 100)
     const precioDeVenta = Math.ceil((costoTotal * (1 + utilidad / 100) + impuesto / 100 * costoTotal * utilidad / 100) / 100) * 100
     const precioUnitario = parseInt(precioDeVenta/talonarios)
     
-    // console.log(`costoTotal/talonarios = ${costoTotal}:${talonarios} = ${costoTotal/talonarios}`)
-
+    console.log({costoManoDeObraImpresion, costoAlzado, costoPerforado, costoSeparado})
 
     return {
         cantidad,
@@ -117,7 +148,7 @@ function resultados(cantidad, moldes, multiplicidad) {
         costoPapel,
         costoDiseno,
         costoImpresion,
-        costoManoDeObra,
+        costoManoDeObraImpresion,
         costoAlzado,
         costoPerforado,
         costoTerminado,
@@ -133,10 +164,9 @@ function resultados(cantidad, moldes, multiplicidad) {
 
 
 
-function listasDePrecios(cantidades, moldes, multiplicidad, htmlId) {
+function listasDePreciosHTML(cantidades, moldes, multiplicidad, htmlId) {
     let el = document.getElementById(htmlId)
     if (el){
-        console.log(el)
         template = ''
         let valores = []
         cantidades.forEach(function (cantidad) {

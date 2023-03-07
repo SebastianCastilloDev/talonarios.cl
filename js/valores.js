@@ -10,7 +10,7 @@ function getParameters() {
     const utilidad = 50
     const impuesto = 27
     const hojasResma = 500
-    const costoResma = 6200
+    const costoResma = null //va a cambiar de acuerto al tamaño de papel
     const costoTinta = 3
     const pagoManoDeObraImpresion = 1600 //por cada (valordecorteoperacionemenores) tiros 
     const pagoOperacionesMenores = 25 //por talonario
@@ -27,7 +27,6 @@ function getParameters() {
         utilidad,
         impuesto,
         hojasResma,
-        costoResma,
         costoTinta,
         pagoManoDeObraImpresion,
         pagoOperacionesMenores,
@@ -41,7 +40,7 @@ function getParameters() {
 
 
 // cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
-const cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
+let cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
 
 
 
@@ -67,9 +66,17 @@ function valores() {
     const multiplicidad = [[2,'duplicado'],[3,'triplicado'],[4,'cuadruplicado'],[1,'simple']]
 
     moldes.forEach((molde)=>{
+        if (molde[1]=='completo') {
+            cantidades = [50,100,150,200, 250,500,1000, 1500,2000,2500,3000,4000,5000]
+        }
         tamanos.forEach( tamano => {
+            if (tamano == 'carta') {
+                costoResma = 6200
+            } else if (tamano == 'oficio') {
+                costoResma = 7300
+            }
             multiplicidad.forEach((mult)=>{
-                listasDePreciosHTML(cantidades, molde[0], mult[0], `${molde[1]}-${tamano}-${mult[1]}`)
+                listasDePreciosHTML(cantidades, molde[0], mult[0], `${molde[1]}-${tamano}-${mult[1]}`, costoResma)
             })
         })
         
@@ -79,7 +86,7 @@ valores()
 
 
 //Funcion que devuelve un objeto con todos los calculos asociaciados al precio.
-function resultados(cantidad, moldes, multiplicidad) {
+function resultados(cantidad, moldes, multiplicidad, costoResma) {
     const {
         sobrantes,
         unTal,
@@ -88,7 +95,6 @@ function resultados(cantidad, moldes, multiplicidad) {
         utilidad,
         impuesto,
         hojasResma,
-        costoResma,
         costoTinta,
         pagoManoDeObraImpresion,
         pagoOperacionesMenores,
@@ -97,6 +103,7 @@ function resultados(cantidad, moldes, multiplicidad) {
         tirajeDeCorte
     } = getParameters()
 
+    console.log(costoResma)
     
     const tirajeUtil = cantidad / moldes * multiplicidad
 
@@ -137,8 +144,6 @@ function resultados(cantidad, moldes, multiplicidad) {
     const costoTotal = costoOperacional * (1 + gg / 100)
     const precioDeVenta = Math.ceil((costoTotal * (1 + utilidad / 100) + impuesto / 100 * costoTotal * utilidad / 100) / 100) * 100
     const precioUnitario = parseInt(precioDeVenta/talonarios)
-    
-    console.log({costoManoDeObraImpresion, costoAlzado, costoPerforado, costoSeparado})
 
     return {
         cantidad,
@@ -164,13 +169,13 @@ function resultados(cantidad, moldes, multiplicidad) {
 
 
 
-function listasDePreciosHTML(cantidades, moldes, multiplicidad, htmlId) {
+function listasDePreciosHTML(cantidades, moldes, multiplicidad, htmlId, costoResma) {
     let el = document.getElementById(htmlId)
     if (el){
         template = ''
         let valores = []
         cantidades.forEach(function (cantidad) {
-            valores.push(resultados(cantidad, moldes, multiplicidad))
+            valores.push(resultados(cantidad, moldes, multiplicidad, costoResma))
         })
         
         valores.forEach(function (valor) {

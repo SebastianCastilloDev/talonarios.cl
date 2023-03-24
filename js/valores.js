@@ -14,7 +14,7 @@ function getParameters() {
     const costoTinta = 3
     const pagoManoDeObraImpresion = 1600 //por cada (valordecorteoperacionemenores) tiros 
     const pagoOperacionesMenores = 25 //por talonario
-    const pagoAlzado = 500  
+    const pagoAlzado = 1000  
     const pagoPerforado = 500
 
     const tirajeDeCorte = 1000 //

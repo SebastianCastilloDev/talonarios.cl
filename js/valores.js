@@ -60,6 +60,7 @@ let cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
 // listasDePreciosHTML(cantidades, 1, 4, "carta-cuadruplicado")
 // listasDePreciosHTML(cantidades, 1, 1, "carta-simple")
 
+// Función que se encarga de imprimir los valores en el HTMl, con el html creado en la funcion listasDePreciosHTML
 function valores() {
     const moldes = [[4,'cuarto'],[2,'media'],[1,'completo']]
     const tamanos = ['carta','oficio']

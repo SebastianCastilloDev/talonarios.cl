@@ -10,7 +10,7 @@ function getParameters() {
     const utilidad = 50
     const impuesto = 27
     const hojasResma = 500
-    const costoResma = null //va a cambiar de acuerto al tamaño de papel
+    let costoResma = null //va a cambiar de acuerto al tamaño de papel
     const costoTinta = 3
     const pagoManoDeObraImpresion = 1600 //por cada (valordecorteoperacionemenores) tiros 
     const pagoOperacionesMenores = 25 //por talonario
@@ -37,35 +37,15 @@ function getParameters() {
 
 }
 
-
-
 // cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
 let cantidades = [50,100,200,500,1000,2000,2500,3000,4000,5000]
-
-
-
-// listasDePreciosHTML(cantidades, moldes, multiplicidad, htmlId)
-// listasDePreciosHTML(cantidades, 4, 2, "cuarto-carta-duplicado")
-// listasDePreciosHTML(cantidades, 4, 3, "cuarto-carta-triplicado")
-// listasDePreciosHTML(cantidades, 4, 4, "cuarto-carta-cuadruplicado")
-// listasDePreciosHTML(cantidades, 4, 1, "cuarto-carta-simple")
-
-// listasDePreciosHTML(cantidades, 2, 2, "media-carta-duplicado")
-// listasDePreciosHTML(cantidades, 2, 3, "media-carta-triplicado")
-// listasDePreciosHTML(cantidades, 2, 4, "media-carta-cuadruplicado")
-// listasDePreciosHTML(cantidades, 2, 1, "media-carta-simple")
-
-// listasDePreciosHTML(cantidades, 1, 2, "carta-duplicado")
-// listasDePreciosHTML(cantidades, 1, 3, "carta-triplicado")
-// listasDePreciosHTML(cantidades, 1, 4, "carta-cuadruplicado")
-// listasDePreciosHTML(cantidades, 1, 1, "carta-simple")
 
 // Función que se encarga de imprimir los valores en el HTMl, con el html creado en la funcion listasDePreciosHTML
 function valores() {
     const moldes = [[4,'cuarto'],[2,'media'],[1,'completo']]
     const tamanos = ['carta','oficio']
     const multiplicidad = [[2,'duplicado'],[3,'triplicado'],[4,'cuadruplicado'],[1,'simple']]
-
+    let costoResma = 0
     moldes.forEach((molde)=>{
         if (molde[1]=='completo') {
             cantidades = [50,100,150,200, 250,500,1000, 1500,2000,2500,3000,4000,5000]
@@ -173,7 +153,7 @@ function resultados(cantidad, moldes, multiplicidad, costoResma) {
 function listasDePreciosHTML(cantidades, moldes, multiplicidad, htmlId, costoResma) {
     let el = document.getElementById(htmlId)
     if (el){
-        template = ''
+        let template = ''
         let valores = []
         cantidades.forEach(function (cantidad) {
             valores.push(resultados(cantidad, moldes, multiplicidad, costoResma))
@@ -199,6 +179,7 @@ function $cl(number) {
     pesos = `$ ${pesos}`
     return pesos
 }
+
 function $formatoNumero(number) {
     let numero = new Intl.NumberFormat('cl-ES').format(number)
     numero = `${numero}`

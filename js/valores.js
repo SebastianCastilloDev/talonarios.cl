@@ -5,9 +5,9 @@ function getParameters() {
     //const multiplicidad = 2
     const sobrantes = 5
     const unTal = 50
-    const valorDiseno = 1000
+    const valorDiseno = 2000
     const gg = 80
-    const utilidad = 50
+    const utilidad = 55
     const impuesto = 27
     const hojasResma = 500
     let costoResma = null //va a cambiar de acuerto al tamaño de papel
@@ -52,9 +52,9 @@ function valores() {
         }
         tamanos.forEach( tamano => {
             if (tamano == 'carta') {
-                costoResma = 6200
+                costoResma = 7500
             } else if (tamano == 'oficio') {
-                costoResma = 7300
+                costoResma = 9000
             }
             multiplicidad.forEach((mult)=>{
                 listasDePreciosHTML(cantidades, molde[0], mult[0], `${molde[1]}-${tamano}-${mult[1]}`, costoResma)

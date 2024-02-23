@@ -1,0 +1,14 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.header-digital {
+    background-color: v.$negro;
+    .logo__recuadro:nth-child(2) {
+        border: 3px solid v.$blanco;
+    }
+
+    .logo__texto {
+        color: v.$blanco;
+    }
+}
+

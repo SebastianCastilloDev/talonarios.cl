@@ -43,6 +43,10 @@
         padding: 1rem;
         margin: 0;
         color: v.$blanco;
+        a {
+            color: v.$blanco;
+            text-decoration: none;
+        }
     }
 
     &__nombre-contacto{
@@ -50,6 +54,11 @@
         font-size: 2.3rem;
         background-color: darken(v.$primario, 20%);
         text-align: center;
+
+        a {
+            color: v.$blanco;
+            text-decoration: none;
+        }
     }
 
     &__logo-iconos{

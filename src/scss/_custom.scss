@@ -1,3 +1,10 @@
+// Colores
+$gris-oscuro: #262626;
+$amarillo: #FFB441;
+
+// Para asignar primary o secondary, podemos hacer esto
+// $primary: $amarillo;
+
 // Importamos el css de bootstrap (todo)
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

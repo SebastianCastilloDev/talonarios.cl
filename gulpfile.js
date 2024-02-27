@@ -22,6 +22,13 @@ function css( done ) {
     done();
 }
 
+function bootstrapJs( done ) {
+    src('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
+        .pipe( dest('build/js') )
+
+    done();
+}
+
 function imagenes() {
     return src('src/img/**/*')
         .pipe( imagemin({ optimizationLevel: 3 }) )
@@ -48,5 +55,6 @@ exports.css = css;
 exports.dev = dev;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
+exports.bootstrapJs = bootstrapJs;
 
-exports.default = series( imagenes, versionWebp, css, dev  );
+exports.default = series( imagenes, versionWebp, css, bootstrapJs, dev  );

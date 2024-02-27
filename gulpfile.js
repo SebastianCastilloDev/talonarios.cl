@@ -59,6 +59,9 @@ function versionWebp() {
 function dev() {
     watch( 'src/scss/**/*.scss', css );
     watch( 'src/img/**/*', imagenes );
+    watch( 'src/js/**/*.js', js );
+    watch( 'src/*.html', html );
+    
 }
 
 exports.html = html;

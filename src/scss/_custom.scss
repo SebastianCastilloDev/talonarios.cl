@@ -5,6 +5,10 @@ $amarillo: #FFB441;
 // Para asignar primary o secondary, podemos hacer esto
 // $primary: $amarillo;
 
-// Importamos el css de bootstrap (todo)
+// Para hacer que el tamaño de la fuente sea más manejable
+$font-size-root: 62.5%;
 
+
+
+// Importamos el css de bootstrap (todo)
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";

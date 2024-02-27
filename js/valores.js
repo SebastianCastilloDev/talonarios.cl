@@ -52,9 +52,9 @@ function valores() {
         }
         tamanos.forEach( tamano => {
             if (tamano == 'carta') {
-                costoResma = 7500
+                costoResma = 6000
             } else if (tamano == 'oficio') {
-                costoResma = 9000
+                costoResma = 7500
             }
             multiplicidad.forEach((mult)=>{
                 listasDePreciosHTML(cantidades, molde[0], mult[0], `${molde[1]}-${tamano}-${mult[1]}`, costoResma)

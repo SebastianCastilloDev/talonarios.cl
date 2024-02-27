@@ -11,6 +11,12 @@ const cssnano = require('cssnano');
 const imagemin = require('gulp-imagemin');
 const webp = require('gulp-webp');
 
+function html( done ) {
+    src('src/*.html')
+        .pipe( dest('build') )
+    done();
+}
+
 function css( done ) {
     src('src/scss/app.scss')
         .pipe( sourcemaps.init() )
@@ -22,10 +28,15 @@ function css( done ) {
     done();
 }
 
+function js( done ) {
+    src('src/js/*.js')
+        .pipe( dest('build/js'))
+    done();
+}
+
 function bootstrapJs( done ) {
     src('node_modules/bootstrap/dist/js/bootstrap.bundle.min.js')
         .pipe( dest('build/js') )
-
     done();
 }
 
@@ -50,11 +61,12 @@ function dev() {
     watch( 'src/img/**/*', imagenes );
 }
 
-
+exports.html = html;
 exports.css = css;
+exports.js = js;
 exports.dev = dev;
 exports.imagenes = imagenes;
 exports.versionWebp = versionWebp;
 exports.bootstrapJs = bootstrapJs;
 
-exports.default = series( imagenes, versionWebp, css, bootstrapJs, dev  );
+exports.default = series( imagenes, versionWebp, html, css, js, bootstrapJs, dev  );

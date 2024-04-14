@@ -5,7 +5,7 @@ function getParameters() {
     //const multiplicidad = 2
     const sobrantes = 5
     const unTal = 50
-    const valorDiseno = 2000
+    const valorDiseno = 10000000
     const gg = 80
     const utilidad = 55
     const impuesto = 27
